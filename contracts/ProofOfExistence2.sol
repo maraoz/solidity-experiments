@@ -7,6 +7,7 @@ contract ProofOfExistence2 {
   // store a proof of existence in the contract state
   // *transactional function*
   function storeProof(bytes32 proof) {
+    if (proofs.length >= 255) { throw; }
     proofs.push(proof);
   }
 
@@ -33,7 +34,7 @@ contract ProofOfExistence2 {
   // returns true if proof is stored
   // *read-only function*
   function hasProof(bytes32 proof) returns (bool) {
-    for (var i = 0; i < proofs.length; i++) {
+    for (uint8 i = 0; i < proofs.length; i++) {
       if (proofs[i] == proof) {
         return true;
       }
